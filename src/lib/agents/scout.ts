@@ -1,6 +1,6 @@
-import { TavilyClient } from "@tavily/core";
+import { tavily as tavilyClient } from "@tavily/core";
 
-const tavily = new TavilyClient({ apiKey: process.env.TAVILY_API_KEY || "" });
+const tavily = tavilyClient({ apiKey: process.env.TAVILY_API_KEY || "" });
 
 export async function scoutScholarships(query: string) {
     try {
@@ -11,7 +11,7 @@ export async function scoutScholarships(query: string) {
             maxResults: 5,
         });
 
-        return response.results.map(result => ({
+        return response.results.map((result: any) => ({
             title: result.title,
             url: result.url,
             content: result.content,
