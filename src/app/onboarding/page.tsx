@@ -5,12 +5,22 @@ import { useRouter } from "next/navigation";
 import { saveProfile } from "@/app/actions/profile";
 import { Loader2, ArrowRight, User, GraduationCap, Briefcase, Award } from "lucide-react";
 
+interface FormData {
+    name: string;
+    rawResumeText: string;
+    education: any[];
+    experience: any[];
+    achievements: any[];
+    skills: string[];
+    preferredFields: string[];
+}
+
 export default function Onboarding() {
     const [step, setStep] = useState(1);
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<FormData>({
         name: "",
         rawResumeText: "",
         education: [],
