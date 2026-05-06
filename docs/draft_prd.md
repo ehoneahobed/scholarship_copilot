@@ -280,7 +280,14 @@ Produce final refined draft.
 
 * End-to-end pipeline per scholarship ≤ 60 seconds
 
-## 5.2 Reliability
+## 5.2 Design System (Colors)
+
+* **Primary**: `#007fbd` (Action blue)
+* **Secondary**: `#004d73` (Deep blue)
+* **Background**: `#00334e` (Midnight navy)
+* **Highlight**: `#dbebfa` (Sky tint)
+
+## 5.3 Reliability
 
 * Zero fabricated claims in final output
 
