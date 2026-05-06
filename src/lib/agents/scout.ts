@@ -7,7 +7,7 @@ export async function scoutScholarships(query: string) {
         console.log(`Scouting for: ${query}`);
         const response = await tavily.search(query, {
             searchDepth: "advanced",
-            includeRawContent: true,
+            includeRawContent: "text",
             maxResults: 5,
         });
 
