@@ -10,6 +10,8 @@ export const metadata: Metadata = {
   description: "Automate your scholarship discovery, evaluation, and application process with advanced AI agents.",
 };
 
+import { Header } from "@/components/Header";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -17,8 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
-      <body className="min-h-screen">
-        <main className="relative z-10 min-h-screen">
+      <body className="min-h-screen" suppressHydrationWarning>
+        <Header />
+        <main className="relative z-10 min-h-screen pt-20">
           {children}
         </main>
       </body>
