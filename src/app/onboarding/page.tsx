@@ -73,6 +73,9 @@ export default function Onboarding() {
         loadProfile();
     }, []);
 
+    const stampIds = (entries: any[]) =>
+        (entries || []).map(e => ({ ...e, id: e.id || Math.random().toString(36).substr(2, 9) }));
+
     const handleMagicFill = async () => {
         if (!formData.rawResumeText) return;
         setExtracting(true);
@@ -81,14 +84,14 @@ export default function Onboarding() {
             if (result) {
                 setFormData(prev => ({
                     ...prev,
-                    education: result.education || prev.education,
-                    experience: result.experience || prev.experience,
-                    volunteering: result.volunteering || prev.volunteering,
-                    achievements: result.achievements || prev.achievements,
-                    skills: result.skills || prev.skills,
-                    nationality: result.nationality || prev.nationality,
-                    residency: result.residency || prev.residency,
-                    currentGPA: result.currentGPA || prev.currentGPA,
+                    education:    result.education    ? stampIds(result.education)    : prev.education,
+                    experience:   result.experience   ? stampIds(result.experience)   : prev.experience,
+                    volunteering: result.volunteering ? stampIds(result.volunteering) : prev.volunteering,
+                    achievements: result.achievements ? stampIds(result.achievements) : prev.achievements,
+                    skills:           result.skills           || prev.skills,
+                    nationality:      result.nationality      || prev.nationality,
+                    residency:        result.residency        || prev.residency,
+                    currentGPA:       result.currentGPA       || prev.currentGPA,
                     levelOfEducation: result.levelOfEducation || prev.levelOfEducation,
                 }));
                 setStep(2);
@@ -114,16 +117,18 @@ export default function Onboarding() {
 
     const addEntry = (type: 'education' | 'experience' | 'volunteering' | 'achievements') => {
         const newEntry = { id: Math.random().toString(36).substr(2, 9), title: "", organization: "", date: "", description: "" };
-        setFormData({ ...formData, [type]: [...(formData[type] as Entry[]), newEntry] });
+        setFormData(prev => ({ ...prev, [type]: [...(prev[type] as Entry[]), newEntry] }));
     };
 
     const updateEntry = (type: 'education' | 'experience' | 'volunteering' | 'achievements', id: string, field: keyof Entry, value: string) => {
-        const updated = (formData[type] as Entry[]).map(entry => entry.id === id ? { ...entry, [field]: value } : entry);
-        setFormData({ ...formData, [type]: updated });
+        setFormData(prev => ({
+            ...prev,
+            [type]: (prev[type] as Entry[]).map(entry => entry.id === id ? { ...entry, [field]: value } : entry)
+        }));
     };
 
     const removeEntry = (type: 'education' | 'experience' | 'volunteering' | 'achievements', id: string) => {
-        setFormData({ ...formData, [type]: (formData[type] as Entry[]).filter(e => e.id !== id) });
+        setFormData(prev => ({ ...prev, [type]: (prev[type] as Entry[]).filter(e => e.id !== id) }));
     };
 
     if (loading) return <div className="flex items-center justify-center min-h-screen"><Loader2 className="w-8 h-8 animate-spin text-brand-primary" /></div>;
