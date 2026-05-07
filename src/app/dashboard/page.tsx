@@ -88,9 +88,13 @@ export default function Dashboard() {
                             >
                                 <ExternalLink className="w-5 h-5" />
                             </a>
-                            <button className="btn btn-secondary py-2 px-4">
-                                Review Details <ChevronRight className="w-4 h-4" />
-                            </button>
+                            <Link 
+                                href={app.status === "REFINED" ? `/dashboard/application/${app.id}/review` : `/dashboard/application/${app.id}`}
+                                className="btn btn-secondary py-2 px-4"
+                            >
+                                {app.status === "REFINED" ? "Final Polish" : "Review Details"} 
+                                <ChevronRight className="w-4 h-4" />
+                            </Link>
                         </div>
                     </div>
                 ))}

@@ -35,34 +35,31 @@ Build a reliable, zero-hallucination AI system that automates the scholarship di
 
 ---
 
-## 🚀 Phase 4: Preparation & Context (The Prep Agent)
+## ✅ Phase 4: Preparation & Context (The Prep Agent)
 *Goal: Identify what's missing and gather the "soul" of the application.*
 - [x] **Agent Logic**: `identifyApplicationGaps` to find missing info/anecdotes.
-- [ ] **Gate 2 UI (Context Gathering)**:
-    - [ ] "Review Details" modal in Dashboard.
-    - [ ] Interactive form asking the specific questions identified by the Prep Agent.
-- [ ] **State Update**: Transition application from `SCORED` to `READY_TO_DRAFT`.
+- [x] **Gate 2 UI (Context Gathering)**:
+    - [x] "Review Details" link in Dashboard.
+    - [x] Interactive form asking the specific questions identified by the Prep Agent.
+- [x] **State Update**: Transition application from `SCORED` to `READY_TO_DRAFT`.
 
 ---
 
-## 🚀 Phase 5: Generation & Refinement (The Drafter Agent)
+## ✅ Phase 5: Generation & Refinement (The Drafter Agent)
 *Goal: High-quality, fact-grounded drafting.*
-- [ ] **Drafter Agent**: 
-    - [ ] Implement logic to generate essay drafts using profile + user context.
-    - [ ] Strict grounding: Ensure every claim is traced to a source in the profile.
-- [ ] **Refiner Agent**:
-    - [ ] Combine Appraisal (critique) and Editing (polish) into a single pass.
-- [ ] **State Update**: Transition to `REFINED`.
+- [x] **Drafter Agent**: Logic to generate essay drafts using profile + user context.
+- [x] **Refiner Agent**: Critique and polish pass for final style alignment.
+- [x] **State Update**: Transition to `REFINED`.
 
 ---
 
-## 🚀 Phase 6: Final Review & Submission (The Final Gate)
+## ✅ Phase 6: Final Review & Submission (The Final Gate)
 *Goal: User approval and record keeping.*
-- [ ] **Gate 3 UI (Final Editor)**:
-    - [ ] Side-by-side view: "Source Facts" vs. "Generated Essay".
-    - [ ] Rich text editor for final user tweaks.
-- [ ] **Submission Tracking**:
-    - [ ] Mark as "Submitted" and store the final version for future "Memory".
+- [x] **Gate 3 UI (Final Editor)**:
+    - [x] Side-by-side view: "Source Facts" vs. "Generated Essay".
+    - [x] Rich text editor for final user tweaks.
+- [x] **Submission Tracking**:
+    - [x] Mark as "READY" and store the final version.
 
 ---
 
