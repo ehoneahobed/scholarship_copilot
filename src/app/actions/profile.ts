@@ -5,14 +5,25 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 
-export async function saveProfile(formData: {
+export interface ProfileData {
     education: any;
     experience: any;
+    volunteering: any;
     achievements: any;
     rawResumeText: string;
     skills: string[];
     preferredFields: string[];
-}) {
+    nationality: string;
+    residency: string;
+    isFirstGen: boolean;
+    gender: string;
+    ethnicity: string;
+    householdContext: string;
+    careerGoals: string;
+    currentGPA: string;
+}
+
+export async function saveProfile(formData: ProfileData) {
     const session = await auth.api.getSession({
         headers: await headers(),
     });
@@ -26,23 +37,42 @@ export async function saveProfile(formData: {
         update: {
             education: formData.education,
             experience: formData.experience,
+            volunteering: formData.volunteering,
             achievements: formData.achievements,
             rawResumeText: formData.rawResumeText,
             skills: formData.skills,
             preferredFields: formData.preferredFields,
+            nationality: formData.nationality,
+            residency: formData.residency,
+            isFirstGen: formData.isFirstGen,
+            gender: formData.gender,
+            ethnicity: formData.ethnicity,
+            householdContext: formData.householdContext,
+            careerGoals: formData.careerGoals,
+            currentGPA: formData.currentGPA,
         },
         create: {
             userId: session.user.id,
             education: formData.education,
             experience: formData.experience,
+            volunteering: formData.volunteering,
             achievements: formData.achievements,
             rawResumeText: formData.rawResumeText,
             skills: formData.skills,
             preferredFields: formData.preferredFields,
+            nationality: formData.nationality,
+            residency: formData.residency,
+            isFirstGen: formData.isFirstGen,
+            gender: formData.gender,
+            ethnicity: formData.ethnicity,
+            householdContext: formData.householdContext,
+            careerGoals: formData.careerGoals,
+            currentGPA: formData.currentGPA,
         },
     });
 
-    revalidatePath("/profile");
+    revalidatePath("/onboarding");
+    revalidatePath("/dashboard");
     return profile;
 }
 

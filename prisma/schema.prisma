@@ -96,10 +96,22 @@ model UserProfile {
   user             User     @relation(fields: [userId], references: [id])
   education        Json?
   experience       Json?
+  volunteering     Json?
   achievements     Json?
   rawResumeText    String?
   skills           String[]
   preferredFields  String[]
+  nationality      String?
+  residency        String?
+  
+  // Identity & Strategic Context
+  isFirstGen       Boolean  @default(false)
+  gender           String?
+  ethnicity        String?
+  householdContext String?  // Narrative of financial/family situation
+  careerGoals      String?  // Long-term vision
+  currentGPA       String?
+  
   updatedAt        DateTime @updatedAt
 
   @@map("user_profile")
