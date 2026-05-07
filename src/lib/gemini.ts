@@ -8,7 +8,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
  */
 export async function generateObject(prompt: string, schema?: any) {
     const model = genAI.getGenerativeModel({ 
-        model: "gemini-2.0-flash",
+        model: "gemini-2.5-flash-lite",
         generationConfig: {
             responseMimeType: "application/json",
         }
@@ -27,7 +27,7 @@ export async function generateObject(prompt: string, schema?: any) {
 }
 
 export async function generateText(prompt: string) {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
     const result = await model.generateContent(prompt);
     const response = await result.response;
     return response.text();
