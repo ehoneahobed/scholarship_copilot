@@ -38,7 +38,7 @@ export function Header() {
                                 <LayoutDashboard className="w-4 h-4" />
                                 <span className="hidden sm:inline">Dashboard</span>
                             </Link>
-                            <Link href="/onboarding" className="flex items-center gap-2 text-sm font-medium text-text-secondary hover:text-white transition-colors">
+                            <Link href="/profile" className="flex items-center gap-2 text-sm font-medium text-text-secondary hover:text-white transition-colors">
                                 <User className="w-4 h-4" />
                                 <span className="hidden sm:inline">Profile</span>
                             </Link>
