@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { runScoutPipeline, getScoredApplications } from "@/app/actions/scout";
 import { Search, Sparkles, Loader2, ExternalLink, ChevronRight } from "lucide-react";
 

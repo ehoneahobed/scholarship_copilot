@@ -4,6 +4,8 @@ import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
+import { EducationLevel, Gender, Ethnicity } from "@/generated/client";
+import { extractProfileFromText } from "@/lib/agents/extractor";
 
 export interface ProfileData {
     education: any;
@@ -16,11 +18,22 @@ export interface ProfileData {
     nationality: string;
     residency: string;
     isFirstGen: boolean;
-    gender: string;
-    ethnicity: string;
+    gender: Gender | "";
+    ethnicity: Ethnicity | "";
     householdContext: string;
     careerGoals: string;
     currentGPA: string;
+    levelOfEducation: EducationLevel | "";
+}
+
+export async function magicAutoFill(text: string) {
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
+
+    if (!session?.user) throw new Error("Unauthorized");
+
+    return await extractProfileFromText(text);
 }
 
 export async function saveProfile(formData: ProfileData) {
@@ -45,11 +58,12 @@ export async function saveProfile(formData: ProfileData) {
             nationality: formData.nationality,
             residency: formData.residency,
             isFirstGen: formData.isFirstGen,
-            gender: formData.gender,
-            ethnicity: formData.ethnicity,
+            gender: formData.gender === "" ? null : formData.gender,
+            ethnicity: formData.ethnicity === "" ? null : formData.ethnicity,
             householdContext: formData.householdContext,
             careerGoals: formData.careerGoals,
             currentGPA: formData.currentGPA,
+            levelOfEducation: formData.levelOfEducation === "" ? null : formData.levelOfEducation,
         },
         create: {
             userId: session.user.id,
@@ -63,11 +77,12 @@ export async function saveProfile(formData: ProfileData) {
             nationality: formData.nationality,
             residency: formData.residency,
             isFirstGen: formData.isFirstGen,
-            gender: formData.gender,
-            ethnicity: formData.ethnicity,
+            gender: formData.gender === "" ? null : formData.gender,
+            ethnicity: formData.ethnicity === "" ? null : formData.ethnicity,
             householdContext: formData.householdContext,
             careerGoals: formData.careerGoals,
             currentGPA: formData.currentGPA,
+            levelOfEducation: formData.levelOfEducation === "" ? null : formData.levelOfEducation,
         },
     });
 

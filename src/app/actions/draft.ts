@@ -31,7 +31,9 @@ export async function runDraftingPipeline(applicationId: string) {
     const draft = await generateEssayDraft(
         application.scholarship, 
         profile, 
-        JSON.parse(application.userContext || "{}")
+        typeof application.userContext === 'string' 
+            ? JSON.parse(application.userContext) 
+            : application.userContext || {}
     );
 
     // 2. Refine Draft
@@ -41,7 +43,7 @@ export async function runDraftingPipeline(applicationId: string) {
     await prisma.application.update({
         where: { id: applicationId },
         data: {
-            draftContent: refinedDraft,
+            draft: refinedDraft,
             status: "REFINED",
         },
     });

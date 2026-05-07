@@ -20,7 +20,7 @@ export default function ApplicationReview({ params }: { params: Promise<{ id: st
             .then(res => res.json())
             .then(data => {
                 setApp(data);
-                setContent(data.draftContent || "");
+                setContent(data.draft || "");
                 setLoading(false);
             });
     }, [id]);
@@ -30,7 +30,7 @@ export default function ApplicationReview({ params }: { params: Promise<{ id: st
         // Save the final content and mark as APPLIED or READY
         await fetch("/api/application/" + id, {
             method: "PATCH",
-            body: JSON.stringify({ draftContent: content, status: "READY" })
+            body: JSON.stringify({ draft: content, status: "READY" })
         });
         router.push("/dashboard");
     };

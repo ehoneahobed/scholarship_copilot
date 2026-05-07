@@ -1,4 +1,4 @@
-import { generateStructuredData } from "@/lib/gemini";
+import { generateObject } from "@/lib/gemini";
 
 export async function identifyApplicationGaps(scholarship: any, profile: any) {
     const prompt = `
@@ -25,7 +25,7 @@ export async function identifyApplicationGaps(scholarship: any, profile: any) {
     `;
 
     try {
-        const result = await generateStructuredData(prompt, {});
+        const result = await generateObject(prompt, {});
         return result.gaps;
     } catch (error) {
         console.error("Gap Analysis Error:", error);

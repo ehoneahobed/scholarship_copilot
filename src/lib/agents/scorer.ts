@@ -1,4 +1,4 @@
-import { generateStructuredData } from "@/lib/gemini";
+import { generateObject } from "@/lib/gemini";
 
 export async function scoreScholarshipFit(scholarship: any, profile: any) {
     const prompt = `
@@ -20,7 +20,7 @@ export async function scoreScholarshipFit(scholarship: any, profile: any) {
     `;
 
     try {
-        const result = await generateStructuredData(prompt, {});
+        const result = await generateObject(prompt, {});
         return result;
     } catch (error) {
         console.error("Scoring Error:", error);
