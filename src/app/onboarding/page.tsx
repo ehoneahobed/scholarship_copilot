@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { saveProfile, getProfile, magicAutoFill, type ProfileData } from "@/app/actions/profile";
 import { Loader2, ArrowRight, ArrowLeft, Plus, Trash2, GraduationCap, Briefcase, Award, Sparkles, Check, Globe, Heart, User, Target, Home, FileText, Wand2, ChevronDown, ChevronUp, Users } from "lucide-react";
 import { EducationLevel, Gender, Ethnicity } from "@/generated/client";
+import { CountrySelect } from "@/components/CountrySelect";
 
 interface Entry {
     id: string;
@@ -215,14 +216,20 @@ export default function Onboarding() {
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div className="flex flex-col gap-4">
-                                <label className="text-sm font-semibold text-text-muted uppercase tracking-wider flex items-center gap-2"><Globe className="w-4 h-4" /> Nationality</label>
-                                <input type="text" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-primary/50 transition-all text-white" value={formData.nationality} onChange={(e) => setFormData({ ...formData, nationality: e.target.value })} />
-                            </div>
-                            <div className="flex flex-col gap-4">
-                                <label className="text-sm font-semibold text-text-muted uppercase tracking-wider flex items-center gap-2"><Globe className="w-4 h-4" /> Residency</label>
-                                <input type="text" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-primary/50 transition-all text-white" value={formData.residency} onChange={(e) => setFormData({ ...formData, residency: e.target.value })} />
-                            </div>
+                            <CountrySelect
+                                label="Nationality"
+                                icon={<Globe className="w-4 h-4" />}
+                                value={formData.nationality}
+                                onChange={(val) => setFormData(prev => ({ ...prev, nationality: val }))}
+                                placeholder="Select your nationality..."
+                            />
+                            <CountrySelect
+                                label="Country of Residency"
+                                icon={<Globe className="w-4 h-4" />}
+                                value={formData.residency}
+                                onChange={(val) => setFormData(prev => ({ ...prev, residency: val }))}
+                                placeholder="Select country of residence..."
+                            />
                             
                             <SelectField 
                                 label="Current Education Level" 
